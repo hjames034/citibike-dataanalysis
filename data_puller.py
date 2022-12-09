@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 # set the URL for the station status JSON feed
-url = 'https://gbfs.bikeshare.com/gbfs/en/station_status.json'
+url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json'
 
 # make a request to the URL and get the JSON response
 response = requests.get(url).json()

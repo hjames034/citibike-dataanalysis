@@ -1,0 +1,17 @@
+name: Update station data
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update_data:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pull station data
+      run: python data_puller.py
+    - name: Commit and push changes
+      run: |
+        git add .
+        git commit -m "Updated station data"
+        git push

@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from datetime import datetime
+import os
 
 # set the URL for the station status JSON feed
 url = 'https://gbfs.citibikenyc.com/gbfs/en/station_status.json'
@@ -16,7 +17,8 @@ minute = now.minute // 15 * 15
 now = now.replace(minute=minute)
 
 # add a column for the current date and time
-response['data']['stations']['last_update'] = now
+for obj in response['data']['stations']:
+    obj['last_update'] = now
 
 # convert the JSON response to a DataFrame
 df = pd.DataFrame(response['data']['stations'])

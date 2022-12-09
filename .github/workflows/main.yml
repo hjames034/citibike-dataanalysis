@@ -1,18 +1,24 @@
-name: Update station data
+name: Data Puller
 
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: "*/15 * * * *"
 
 jobs:
-  update_data:
+  data_pull:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Pull station data
-      run: python data_puller.py
-    - name: Commit and push changes
+    - name: Install dependencies
       run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run data_puller.py
+      run: python3 data_puller.py
+    - name: Commit changes
+      run: |
+        git config --global user.email "hjames034@gmail.com"
+        git config --global user.name "hjames034"
         git add .
-        git commit -m "Updated station data"
+        git commit -m "Data pull from bikeshare system"
         git push
